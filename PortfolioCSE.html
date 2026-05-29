@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maddox Le | Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Comfortaa', cursive; background-color: #f0f9ff; scroll-behavior: smooth; }
+        .tab-content { display: none; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+        .tab-content.active { display: block; opacity: 1; transform: translateY(0); }
+        .nav-pill { transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; white-space: nowrap; }
+        .nav-pill.active { background-color: #3b82f6; color: white; border-color: #2563eb; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3); }
+        
+        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+        .modal-window { background: #1e1e1e; width: 95%; max-width: 900px; border-radius: 2.5rem; overflow: hidden; border: 1px solid #333; }
+        .modal-header { background: #2d2d2d; padding: 15px 25px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #444; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        
+        #term-body { padding: 30px; color: #4ade80; height: 450px; overflow-y: auto; font-family: monospace; font-size: 14px; line-height: 1.6; }
+        .term-input-area { padding: 15px 25px; background: #151515; display: flex; gap: 10px; border-top: 1px solid #333; }
+        #term-input { background: transparent; border: none; color: white; outline: none; width: 100%; font-family: monospace; }
+
+        /* Slideshow Container */
+        .slideshow-container { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
+        .slideshow-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        .resume-container { background: white; border-radius: 2rem; padding: 3rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); text-align: left; }
+        .resume-section-title { color: #3b82f6; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; border-bottom: 1px solid #eff6ff; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .skill-chip { background: #f8fafc; border: 1px solid #e2e8f0; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; color: #475569; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <div id="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <div class="dot bg-red-500"></div><div class="dot bg-yellow-500"></div><div class="dot bg-green-500"></div>
+                <span id="modal-title" class="text-slate-400 text-xs ml-2 font-bold uppercase tracking-widest italic">Project View</span>
+                <button onclick="closeModal()" class="ml-auto text-slate-400 hover:text-white text-2xl">✕</button>
+            </div>
+            
+            <div id="project-display-area">
+                </div>
+        </div>
+    </div>
+
+    <nav class="fixed top-8 left-1/2 -translate-x-1/2 z-50">
+        <div class="bg-white/80 backdrop-blur-xl border border-blue-100 p-2 rounded-full shadow-2xl flex gap-1 md:gap-2">
+            <button onclick="showTab('about', this)" class="nav-pill active px-4 md:px-8 py-2 rounded-full text-xs md:text-sm font-bold">About Me</button>
+            <button onclick="showTab('projects', this)" class="nav-pill px-4 md:px-8 py-2 rounded-full text-xs md:text-sm font-bold">Projects</button>
+            <button onclick="showTab('resume', this)" class="nav-pill px-4 md:px-8 py-2 rounded-full text-xs md:text-sm font-bold">Resume</button>
+            <button onclick="showTab('contact', this)" class="nav-pill px-4 md:px-8 py-2 rounded-full text-xs md:text-sm font-bold">Contact</button>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-20 px-6 max-w-5xl mx-auto">
+        <div id="about" class="tab-content active">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-6xl font-bold text-blue-950 mb-2 italic text-center md:text-left">Maddox Le</h1>
+                <h2 class="text-2xl font-bold text-blue-600 mb-8 text-center md:text-left">About Me</h2>
+                <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+                    <p>I imagine my future career in an office environment where I am able to focus on my own work while still being part of a team. My career goal is to become the <strong>Head of Talent</strong>. I would hire employees and help make sure people feel supported at work. In order to reach this goal I need to go to college and study business or management. I would then need to gain experience through different office jobs. I enjoy this career since it involves talking to others while still working in a calm office environment.</p>
+                    <p>One of my strengths is <strong>communication</strong>, which I have shown multiple times during group projects at school. When I work in groups I try to listen to others ideas and make sure everyone is on board and knows what to do. For example I am always trying to keep the conversation flowing with different ideas and making sure we finish every part.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="projects" class="tab-content">
+            <h2 class="text-3xl font-bold text-blue-950 mb-12 text-center italic">Project Portfolio</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div onclick="openSlideshow()" class="cursor-pointer group bg-white p-8 rounded-[2.5rem] border border-blue-100 shadow-sm hover:shadow-xl transition-all text-center">
+                    <div class="bg-red-500 h-32 rounded-2xl mb-4 flex items-center justify-center text-white text-4xl">🏥</div>
+                    <h3 class="font-bold text-blue-900">Health Innovations</h3>
+                    <p class="text-xs text-slate-500 mt-2">Open Presentation</p>
+                </div>
+                
+                <div onclick="openVexTerminal()" class="cursor-pointer group bg-white p-8 rounded-[2.5rem] border border-blue-100 shadow-sm hover:shadow-xl transition-all text-center">
+                    <div class="bg-blue-600 h-32 rounded-2xl mb-4 flex items-center justify-center text-white text-4xl">🤖</div>
+                    <h3 class="font-bold text-blue-900">VEX Logic</h3>
+                </div>
+                
+                <div onclick="openShopTerminal()" class="cursor-pointer group bg-white p-8 rounded-[2.5rem] border border-blue-100 shadow-sm hover:shadow-xl transition-all text-center">
+                    <div class="bg-slate-900 h-32 rounded-2xl mb-4 flex items-center justify-center text-emerald-400 text-4xl">🍔</div>
+                    <h3 class="font-bold text-blue-900">Combo Menu</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="resume" class="tab-content">
+            <div class="resume-container max-w-4xl mx-auto">
+                <header class="text-center mb-12">
+                    <h1 class="text-4xl font-bold text-blue-950 mb-2 uppercase">Maddox Le</h1>
+                    <p class="text-blue-600 font-bold uppercase tracking-widest text-sm">High School Student and Taekwondo Instructor</p>
+                    <p class="text-slate-500 mt-4 max-w-3xl mx-auto text-sm leading-relaxed">
+                        Disciplined and leadership-oriented High School Student with over 9 years of experience in martial arts and 2+ years as an Assistant Instructor. 
+                        A 2nd Degree Black Belt and Presidential Award recipient.
+                    </p>
+                </header>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="md:col-span-1 space-y-8">
+                        <section>
+                            <h3 class="resume-section-title">Contact</h3>
+                            <p class="text-sm text-slate-600">3600 Central Parkway, Dublin, CA 94568<br>le6586@mydusd.org</p>
+                        </section>
+                        <section>
+                            <h3 class="resume-section-title">Skills</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-chip">Leadership</span><span class="skill-chip">Spanish</span>
+                                <span class="skill-chip">Teamwork</span><span class="skill-chip">Administration</span>
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="resume-section-title">Awards</h3>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• CA State Champion - 2023</li>
+                                <li>• Presidential Award - 2024</li>
+                                <li>• 2nd Degree Black Belt - 2025</li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="md:col-span-2 space-y-8">
+                        <section>
+                            <h3 class="resume-section-title">Experience</h3>
+                            <div class="resume-item">
+                                <h4 class="font-bold text-blue-950 uppercase">Mach Martial Arts</h4>
+                                <p class="text-blue-600 italic text-sm mb-3">Assistant Instructor | 2024-Present</p>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>• Facilitate drills and training for 3+ weekly classes.</li>
+                                    <li>• Manage administration for class sizes of 30+.</li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <div class="bg-white p-12 rounded-[3rem] border border-blue-50 shadow-sm text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-blue-950 mb-4 italic">Get In Touch</h2>
+                <form id="contact-form" class="space-y-4">
+                    <input type="text" id="contact-name" placeholder="Name" required class="w-full p-4 bg-slate-50 rounded-xl outline-none ring-1 ring-blue-100">
+                    <textarea id="contact-message" placeholder="Message" rows="4" required class="w-full p-4 bg-slate-50 rounded-xl outline-none ring-1 ring-blue-100"></textarea>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-full hover:bg-blue-700 transition-colors">Send Message</button>
+                </form>
+                <div id="contact-status" class="hidden mt-4 p-4 rounded-xl text-green-700 bg-green-100 font-bold"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentMode = "";
+        let shopStep = "init";
+        let bill = 0.0;
+        let s_type = "", d_size = "", f_size = "";
+        let q1 = 0, q2 = 0, q3 = 0;
+        let hasS = false, hasD = false, hasF = false;
+
+        function showTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function closeModal() { 
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('project-display-area').innerHTML = ""; 
+        }
+
+        function openSlideshow() {
+            document.getElementById('modal-overlay').style.display = 'flex';
+            document.getElementById('modal-title').innerText = "GLOBAL_HEALTH_INNOVATIONS.PPTX";
+            document.getElementById('project-display-area').innerHTML = `
+                <div class="slideshow-container">
+                    <iframe src="https://docs.google.com/presentation/d/1mqhy-SzdEedQsyl_Gs_Tnuakg-fsIHXAwRNcMPUYR9c/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                </div>
+            `;
+        }
+
+        function openVexTerminal() {
+            currentMode = "VEX";
+            document.getElementById('modal-overlay').style.display = 'flex';
+            document.getElementById('modal-title').innerText = "VEX_ROBOT_LOGIC.PY";
+            injectTerminal();
+            document.getElementById('term-body').innerHTML = `<span class="text-blue-300">import vex</span><br><br>VEX IQ Connected...<br>Commands: 'fwd', 'status', 'stop'`;
+        }
+
+        function openShopTerminal() {
+            currentMode = "SHOP";
+            shopStep = "init";
+            bill = 0.0;
+            hasS = false; hasD = false; hasF = false;
+            document.getElementById('modal-overlay').style.display = 'flex';
+            document.getElementById('modal-title').innerText = "COMBO_MENU.PY";
+            injectTerminal();
+            document.getElementById('term-body').innerHTML = "Welcome! Press Enter to start your order...";
+        }
+
+        function injectTerminal() {
+            document.getElementById('project-display-area').innerHTML = `
+                <div id="terminal-view">
+                    <div id="term-body"></div>
+                    <div class="term-input-area">
+                        <span class="text-blue-400 font-bold">>>></span>
+                        <input type="text" id="term-input" placeholder="Type command..." onkeypress="handleTerminalInput(event)">
+                    </div>
+                </div>
+            `;
+            document.getElementById('term-input').focus();
+        }
+
+        function handleTerminalInput(e) {
+            if (e.key === 'Enter') {
+                const val = e.target.value.toLowerCase().trim();
+                const b = document.getElementById('term-body');
+                b.innerHTML += `<br><span class="text-white">> ${val}</span>`;
+                e.target.value = "";
+
+                if (currentMode === "VEX") {
+                    if (val === "fwd") b.innerHTML += "<br>Moving forward...";
+                    else if (val === "status") b.innerHTML += "<br>Systems Nominal.";
+                    else if (val === "stop") b.innerHTML += "<br>Stopped.";
+                } else if (currentMode === "SHOP") {
+                    // Logic from Combo_Menuv4-4 (1).py [cite: 2]
+                    switch(shopStep) {
+                        case "init":
+                            b.innerHTML += "<br>Sandwich type? chicken $5.25, beef $6.25, tofu $5.75";
+                            shopStep = "sandwich";
+                            break;
+                        case "sandwich":
+                            if (["chicken", "beef", "tofu"].includes(val)) {
+                                s_type = val; b.innerHTML += "<br>How many?"; shopStep = "q1";
+                            }
+                            break;
+                        case "q1":
+                            q1 = parseInt(val) || 1;
+                            bill += (s_type === "chicken" ? 5.25 : s_type === "beef" ? 6.25 : 5.75) * q1;
+                            hasS = true; b.innerHTML += "<br>Drink? yes/no"; shopStep = "d_ask";
+                            break;
+                        case "d_ask":
+                            if (val === "yes") {
+                                b.innerHTML += "<br>Size? small $1.00, medium $1.75, large $2.25"; shopStep = "d_size";
+                            } else { b.innerHTML += "<br>Fries? yes/no"; shopStep = "f_ask"; }
+                            break;
+                        case "d_size":
+                            if (["small", "medium", "large"].includes(val)) {
+                                d_size = val; b.innerHTML += "<br>How many?"; shopStep = "q2";
+                            }
+                            break;
+                        case "q2":
+                            q2 = parseInt(val) || 1;
+                            bill += (d_size === "small" ? 1.0 : d_size === "medium" ? 1.75 : 2.25) * q2;
+                            hasD = true; b.innerHTML += "<br>Fries? yes/no"; shopStep = "f_ask";
+                            break;
+                        case "f_ask":
+                            if (val === "yes") {
+                                b.innerHTML += "<br>Size? small $1.00, medium $1.50, large $2.00"; shopStep = "f_size";
+                            } else { b.innerHTML += "<br>Ketchup ($0.25)?"; shopStep = "ketch"; }
+                            break;
+                        case "f_size":
+                            if (val === "small") {
+                                b.innerHTML += "<br>Upgrade to Mega for $2.00? yes/no"; shopStep = "mega";
+                            } else { f_size = val; b.innerHTML += "<br>How many?"; shopStep = "q3"; }
+                            break;
+                        case "mega":
+                            f_size = (val === "yes" ? "mega" : "small");
+                            b.innerHTML += "<br>How many?"; shopStep = "q3";
+                            break;
+                        case "q3":
+                            q3 = parseInt(val) || 1;
+                            let fP = (f_size === "mega" ? 2.0 : f_size === "small" ? 1.0 : f_size === "medium" ? 1.5 : 2.0);
+                            bill += fP * q3; hasF = true; b.innerHTML += "<br>Ketchup packets?"; shopStep = "ketch";
+                            break;
+                        case "ketch":
+                            bill += (parseInt(val) || 0) * 0.25;
+                            if (hasS && hasD && hasF) { b.innerHTML += "<br><span class='text-yellow-400'>Combo Deal! -$1.00</span>"; bill -= 1.0; }
+                            b.innerHTML += `<br>Total: $${bill.toFixed(2)}<br>Thank You!`;
+                            shopStep = "done";
+                            break;
+                    }
+                }
+                b.scrollTop = b.scrollHeight;
+            }
+        }
+
+        document.getElementById('contact-form').onsubmit = (e) => {
+            e.preventDefault();
+            const status = document.getElementById('contact-status');
+            status.innerText = "Message sent successfully!";
+            status.classList.remove('hidden');
+            e.target.reset();
+        };
+    </script>
+</body>
+</html>
